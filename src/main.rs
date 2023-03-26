@@ -1,6 +1,23 @@
 mod day_one;
+mod day_two;
 
 fn main() {
+    //run_day_one();
+    run_day_two();
+}
+
+fn run_day_two() {
+    match day_two::DayTwo::from_file("inputs\\day_two.txt") {
+        Ok(day_two) => {
+            println!("Assumed total Score: {}", day_two.get_assumed_total());
+            println!("Actual total Score: {}", day_two.get_actual_total());
+            
+        },
+        Err(e) => println!("Error while trying to load day_two: {}", e)
+    }
+}
+
+fn run_day_one() {
     match day_one::DayOne::from_file("inputs\\day_one.txt") {
         Ok(day_one) => {
             match day_one.most_calories() {
