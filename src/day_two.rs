@@ -72,51 +72,23 @@ impl DayTwo {
 
 fn which_to_play(elf_move: &String, player_action: &String) -> String {
     let player_move = match player_action.as_str() {
-        "X" => { // lose
-            match elf_move.as_str() {
-                "A" => { // rock
-                    // lose vs. rock; scissors
-                    "Z"
-                },
-                "B" => { // paper
-                    // lose vs. paper; rock
-                    "X"
-                },
-                "C" => { // scissors
-                    // lose vs. scissors; paper
-                    "Y"
-                },
-                _ => { // invalid
-                    "L"
-                },
-            }
+        "X" => match elf_move.as_str() { // lose
+            "A" => "Z", // lose vs. rock; scissors
+            "B" => "X", // lose vs. paper; rock
+            "C" => "Y", // lose vs. scissors; paper
+             _  => "L", // invalid
         },
-        "Y" => { // draw
-            match elf_move.as_str() {
-                "A" => "X",
-                "B" => "Y",
-                "C" => "Z",
-                _ => "L",
-            }
+        "Y" => match elf_move.as_str() { // draw
+            "A" => "X", // rock vs. rock
+            "B" => "Y", // paper vs. paper
+            "C" => "Z", // scissors vs. scissors
+             _  => "L",
         },
-        "Z" => { // win
-            match elf_move.as_str() {
-                "A" => { // rock
-                    // win vs. rock; paper
-                    "Y"
-                }
-                "B" => { // paper
-                    // win vs. paper; scissors
-                    "Z"
-                },
-                "C" => { // scissors
-                    // win vs. scissors; rock
-                    "X"
-                },
-                _ => { // invalid
-                    "L"
-                },
-            }
+        "Z" => match elf_move.as_str() { // win
+            "A" => "Y", // win vs. rock; paper        
+            "B" => "Z", // win vs. paper; scissors
+            "C" => "X", // win vs. scissors; rock
+             _  => "L" // invalid
         },
         _ => "L",
     };
@@ -132,54 +104,27 @@ fn calc_points_for_move(elf_move: &String, player_move: &String) -> u32 {
             points += 1;
 
             match elf_move.as_str() {
-                "A" => { // rock
-                    // rock vs. rock; tie
-                    points += 3;
-                },
-                "C" => { // scissors
-                    // rock vs. scissors; win
-                    points += 6;
-                },
-                _ => { // paper / invalid
-                    // rock vs. paper/invalid; lose
-                    points += 0;
-                },
+                "A" => points += 3, // rock vs. rock; tie
+                "C" => points += 6, // rock vs. scissors; win
+                 _  => points += 0, // rock vs. paper/invalid; lose
             }
         },
         "Y" => { // paper
             points += 2;
 
             match elf_move.as_str() {
-                "A" => { // rock
-                    // paper vs. rock; win
-                    points += 6;
-                },
-                "B" => { // paper
-                    // paper vs. paper; tie
-                    points += 3;
-                },
-                _ => { // scissors / invalid
-                    // paper vs. scissors/invalid; lose
-                    points += 0;
-                },
+                "A" => points += 6, // paper vs. rock; win
+                "B" => points += 3, // paper vs. paper; tie
+                 _  => points += 0, // paper vs. scissors/invalid; lose
             }
         },
         "Z" => { // scissors
             points += 3;
 
             match elf_move.as_str() {
-                "B" => { // paper
-                    // scissors vs. paper; win
-                    points += 6;
-                },
-                "C" => { // scissors
-                    // scissors vs. scissors; tie
-                    points += 3;
-                },
-                _ => { // rock / invalid
-                    // scissors vs. rock/invalid; lose
-                    points += 0;
-                },
+                "B" => points += 6, // scissors vs. paper; win
+                "C" => points += 3, // scissors vs. scissors; tie
+                 _  => points += 0, // scissors vs. rock/invalid; lose
             }
         },
         _ => points += 0,
