@@ -4,7 +4,7 @@ use std::{fs::File, error::Error, io::{BufReader, BufRead}};
 // make it possible to edit the original list l8r if needed, lol
 
 pub struct DayOne {
-    calorie_data: Vec<u32>
+    calorie_data: Vec<i32>
 }
 
 impl DayOne {
@@ -22,7 +22,7 @@ impl DayOne {
                         calorie_data.push(0)
                     } else {
                         if let Some(cals) = calorie_data.last_mut() {
-                            *cals += str.parse::<u32>()?
+                            *cals += str.parse::<i32>()?
                         }
                     }
                 },
@@ -41,11 +41,11 @@ impl DayOne {
 }
 
 impl DayOne {
-    pub fn most_calories(&self) -> Option<&u32> {
+    pub fn most_calories(&self) -> Option<&i32> {
         self.calorie_data.first()
     }
 
-    pub fn get_top(&self, top_count: usize) -> Option<Vec<u32>> {
+    pub fn get_top(&self, top_count: usize) -> Option<Vec<i32>> {
         if top_count > self.calorie_data.len() {
             None
         } else {

@@ -43,7 +43,7 @@ impl DayTwo {
 // C = S
 
 impl DayTwo {
-    pub fn get_assumed_total(&self) -> u32 {
+    pub fn get_assumed_total(&self) -> i32 {
         let mut total_score = 0;
 
         for (elf_move, player_move) in &self.turns {
@@ -57,7 +57,7 @@ impl DayTwo {
     // Y = draw (3)
     // Z = win (6)
 
-    pub fn get_actual_total(&self) -> u32 {
+    pub fn get_actual_total(&self) -> i32 {
         let mut actual_total_score = 0;
 
         for (elf_move, player_action) in &self.turns {
@@ -96,7 +96,7 @@ fn which_to_play(elf_move: &String, player_action: &String) -> String {
     String::from(player_move)
 }
 
-fn calc_points_for_move(elf_move: &String, player_move: &String) -> u32 {
+fn calc_points_for_move(elf_move: &String, player_move: &String) -> i32 {
     let mut points = 0;
 
     match player_move.as_str() {
